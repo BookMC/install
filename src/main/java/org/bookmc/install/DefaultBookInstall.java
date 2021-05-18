@@ -15,7 +15,7 @@ public class DefaultBookInstall implements BookInstall {
         platform.init(versionJson);
         // Create our new folder
         File librariesFolder = platform.getLibrariesFolder();
-        File versionFolder = platform.createVersionFolder(platform.getId() + version);
+        File versionFolder = platform.createVersionFolder(platform.getId());
 
         for (URL library : platform.getRequiredLibraries(versionJson)) {
             String path = library.getPath();
@@ -37,7 +37,7 @@ public class DefaultBookInstall implements BookInstall {
 
         // We've done our part! Let the platform do it's stuff
         Instant now = Instant.ofEpochMilli(System.currentTimeMillis());
-        platform.appendLaunchProfile(platform.getId() + version, platform.getId() + version, "custom", now.toString(), now.toString(), icon);
+        platform.appendLaunchProfile(platform.getId(), platform.getId(), "custom", now.toString(), now.toString(), icon);
 
         return true;
     }
