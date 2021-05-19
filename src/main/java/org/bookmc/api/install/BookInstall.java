@@ -10,10 +10,10 @@ import java.net.MalformedURLException;
 import java.nio.charset.StandardCharsets;
 
 public interface BookInstall {
-    boolean install(InstallationPlatform platform, String version, byte[] versionJson, String icon) throws FileNotFoundException, MalformedURLException;
+    boolean install(InstallationPlatform platform, byte[] versionJson, String icon) throws FileNotFoundException, MalformedURLException;
 
-    default boolean install(InstallationPlatform platform, String version,  String versionJson, String icon) throws FileNotFoundException, MalformedURLException {
-        return install(platform, version, versionJson.getBytes(StandardCharsets.UTF_8), icon);
+    default boolean install(InstallationPlatform platform, String versionJson, String icon) throws FileNotFoundException, MalformedURLException {
+        return install(platform, versionJson.getBytes(StandardCharsets.UTF_8), icon);
     }
 
     /**
@@ -22,7 +22,7 @@ public interface BookInstall {
      * You MUST specify the version in the version.json as LOCAL or it will attempt to download your library from the internet!
      * @param platform The platform which the custom client is being installed to.
      */
-    default boolean installLocal(InstallationPlatform platform, String version, String icon) {
+    default boolean installLocal(InstallationPlatform platform, String icon) {
         try (InputStream inputStream = getClass().getResourceAsStream("/assets/version/version.json")) {
             byte[] data = new byte[1024];
 
@@ -37,7 +37,7 @@ public interface BookInstall {
                     buffer.write(data, 0, read);
                 }
 
-                return install(platform, version, buffer.toByteArray(), icon);
+                return install(platform, buffer.toByteArray(), icon);
             }
         } catch (IOException e) {
             e.printStackTrace();

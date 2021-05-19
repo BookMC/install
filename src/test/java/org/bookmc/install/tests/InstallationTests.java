@@ -10,6 +10,6 @@ public class InstallationTests {
     public void installMinecraftViaNormalLauncher() {
         BookInstall install = new DefaultBookInstall();
 
-        assert install.installLocal(new MojangInstallationPlatform(), "1.8.9", "furnace");
+        assert install.installLocal(new MojangInstallationPlatform(), "furnace");
     }
 }

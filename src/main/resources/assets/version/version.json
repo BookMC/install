@@ -27,18 +27,19 @@
   "id": "BookMC-1.8.9",
   "libraries": [
     {
-      "name": "net.minecraft:launchwrapper:1.12"
+      "name": "com.github.BookMC:LegacyLauncher:2cbe27165a",
+      "url": "https://jitpack.io/"
     },
     {
-      "name": "com.github.BookMC:loader:a912dd3b15",
+      "name": "com.github.BookMC:loader:5da4fc3020",
+      "url": "https://jitpack.io/"
+    },
+    {
+      "name": "com.github.BookMC:tweaker:f44e76352f",
       "url": "https://jitpack.io/"
     },
     {
       "name": "com.github.BookMC.minecraft:client:950c78fd50",
-      "url": "https://jitpack.io/"
-    },
-    {
-      "name": "com.github.BookMC:modding:edb7f0ee8e",
       "url": "https://jitpack.io/"
     },
     {
