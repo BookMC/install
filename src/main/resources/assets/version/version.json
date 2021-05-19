@@ -30,11 +30,11 @@
       "name": "net.minecraft:launchwrapper:1.12"
     },
     {
-      "name": "com.github.BookMC:loader:c85c49f061",
+      "name": "com.github.BookMC:loader:a912dd3b15",
       "url": "https://jitpack.io/"
     },
     {
-      "name": "com.github.BookMC.minecraft:client:ff6fe92ae8",
+      "name": "com.github.BookMC.minecraft:client:950c78fd50",
       "url": "https://jitpack.io/"
     },
     {
