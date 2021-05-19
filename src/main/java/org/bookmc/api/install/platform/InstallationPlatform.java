@@ -14,13 +14,13 @@ import java.net.URL;
 public interface InstallationPlatform {
     void init(byte[] versionJson);
 
-    File getMinecraftDirectory();
+    void appendLaunchProfile(String name, String lastVersionId, String type, String created, String lastUsed, String icon);
 
     File createVersionFolder(String name) throws FileNotFoundException;
 
-    void appendLaunchProfile(String name, String lastVersionId, String type, String created, String lastUsed, String icon);
+    Library[] getRequiredLibraries(byte[] versionJson) throws MalformedURLException;
 
-    URL[] getRequiredLibraries(byte[] versionJson) throws MalformedURLException;
+    File getMinecraftDirectory();
 
     String getId();
 
