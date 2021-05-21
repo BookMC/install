@@ -31,15 +31,31 @@
       "url": "https://jitpack.io/"
     },
     {
-      "name": "com.github.BookMC:loader:5da4fc3020",
+      "name": "com.github.BookMC:loader:dd89085",
       "url": "https://jitpack.io/"
     },
     {
-      "name": "com.github.BookMC:tweaker:f44e76352f",
+      "name": "com.github.BookMC:tweaker:42ed3ab",
       "url": "https://jitpack.io/"
     },
     {
-      "name": "com.github.BookMC.minecraft:client:950c78fd50",
+      "name": "net.bytebuddy:byte-buddy-agent:1.9.9",
+      "url": "https://repo1.maven.org/maven2/"
+    },
+    {
+      "name": "org.ow2.asm:asm:9.1",
+      "url": "https://repo1.maven.org/maven2/"
+    },
+    {
+      "name": "org.ow2.asm:asm-tree:9.1",
+      "url": "https://repo1.maven.org/maven2/"
+    },
+    {
+      "name": "com.github.BookMC.minecraft:client:bdfdac0e12",
+      "url": "https://jitpack.io/"
+    },
+    {
+      "name": "com.github.BookMC:mixin-transformation-hacks:64c54b593a",
       "url": "https://jitpack.io/"
     },
     {
