@@ -43,15 +43,23 @@
       "url": "https://repo1.maven.org/maven2/"
     },
     {
-      "name": "org.ow2.asm:asm:9.1",
-      "url": "https://repo1.maven.org/maven2/"
-    },
-    {
       "name": "org.ow2.asm:asm-tree:9.1",
       "url": "https://repo1.maven.org/maven2/"
     },
     {
-      "name": "com.github.BookMC.minecraft:client:bdfdac0e12",
+      "name": "org.ow2.asm:asm-commons:9.1",
+      "url": "https://repo1.maven.org/maven2/"
+    },
+    {
+      "name": "org.ow2.asm:asm-util:9.1",
+      "url": "https://repo1.maven.org/maven2/"
+    },
+    {
+      "name": "om.google.guava:guava:21.0",
+      "url": "https://repo1.maven.org/maven2/"
+    },
+    {
+      "name": "com.github.BookMC.minecraft:client:61441a0631",
       "url": "https://jitpack.io/"
     },
     {
