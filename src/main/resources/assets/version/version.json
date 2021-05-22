@@ -39,10 +39,6 @@
       "url": "https://jitpack.io/"
     },
     {
-      "name": "net.bytebuddy:byte-buddy-agent:1.9.9",
-      "url": "https://repo1.maven.org/maven2/"
-    },
-    {
       "name": "org.ow2.asm:asm-tree:9.1",
       "url": "https://repo1.maven.org/maven2/"
     },
@@ -60,10 +56,6 @@
     },
     {
       "name": "com.github.BookMC.minecraft:client:61441a0631",
-      "url": "https://jitpack.io/"
-    },
-    {
-      "name": "com.github.BookMC:mixin-transformation-hacks:64c54b593a",
       "url": "https://jitpack.io/"
     },
     {
