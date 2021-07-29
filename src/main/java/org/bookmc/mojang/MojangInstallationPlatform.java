@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.apache.commons.io.FileUtils;
 import org.bookmc.api.install.platform.InstallationPlatform;
 import org.bookmc.api.install.platform.Library;
 import org.bookmc.mojang.utils.MojangDirectoryUtils;
@@ -25,6 +26,11 @@ public class MojangInstallationPlatform implements InstallationPlatform {
 
     public MojangInstallationPlatform() {
         directory = MojangDirectoryUtils.providePlatformDirectory();
+        try {
+            FileUtils.deleteDirectory(new File(directory, "libraries/com/github/BookMC"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private JsonObject versionJson;
