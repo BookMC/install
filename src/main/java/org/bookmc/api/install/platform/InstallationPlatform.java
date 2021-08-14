@@ -3,7 +3,6 @@ package org.bookmc.api.install.platform;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
-import java.net.URL;
 
 /**
  * An interface to provide platform specific values to the API.

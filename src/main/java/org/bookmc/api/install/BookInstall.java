@@ -18,8 +18,9 @@ public interface BookInstall {
 
     /**
      * Grabs the data from a local version.json
-     *
+     * <p>
      * You MUST specify the version in the version.json as LOCAL or it will attempt to download your library from the internet!
+     *
      * @param platform The platform which the custom client is being installed to.
      */
     default boolean installLocal(InstallationPlatform platform, String icon) {

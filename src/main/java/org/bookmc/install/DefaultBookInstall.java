@@ -1,5 +1,6 @@
 package org.bookmc.install;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bookmc.api.install.BookInstall;
@@ -7,7 +8,10 @@ import org.bookmc.api.install.platform.InstallationPlatform;
 import org.bookmc.api.install.platform.Library;
 import org.bookmc.api.install.utils.DownloadUtils;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Instant;
@@ -32,11 +36,19 @@ public class DefaultBookInstall implements BookInstall {
             String path = url.getPath().replace("/maven2", "");
             String name = path.substring(path.lastIndexOf('/') + 1).replace(".jar", "");
 
-            logger.info("Attempting to " + (library.isLocal() ? "copy" : "download") + " " + url);
 
-            File file =  library.isLocal() ? new File(librariesFolder, library.getPath()) : new File(librariesFolder, path.substring(0, path.lastIndexOf('/')));
+            File file = library.isLocal() ? new File(librariesFolder, library.getPath()) : new File(librariesFolder, path.substring(0, path.lastIndexOf('/')));
 
-            DownloadUtils.downloadJar(url, name, file);
+            try {
+                FileUtils.deleteDirectory(file.getParentFile());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if (library.isLocal()) {
+                logger.info("Attempting to copy " + url);
+                DownloadUtils.downloadJar(url, name, file);
+            }
         }
 
         File versionJsonFile = new File(versionFolder, platform.getId() + ".json");

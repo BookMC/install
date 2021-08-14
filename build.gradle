@@ -1,9 +1,17 @@
 plugins {
     id "java"
+    id "maven-publish"
+}
+
+ext {
+    def env = System.getenv()
+    local = !env.GITHUB_ACTIONS
+    jdk = JavaVersion.current().getMajorVersion()
+    branch = "git rev-parse --abbrev-ref HEAD".execute().text
 }
 
 group "org.bookmc"
-version "0.0.1"
+version "0.1.0${local ? "-local" : ""}${JavaVersion.current() != JavaVersion.VERSION_1_8 ? "+jdk.$jdk" : ""}"
 
 repositories {
     mavenCentral()
@@ -23,4 +31,40 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+publishing {
+    repositories {
+        maven {
+            def env = System.getenv()
+
+            boolean isEnvVarsAvailable = env.containsKey("MAVEN_USER") && env.containsKey("MAVEN_PASSWORD")
+
+            if (isEnvVarsAvailable) {
+                credentials {
+                    username env.get("MAVEN_USER")
+                    password env.get("MAVEN_PASSWORD")
+                }
+            }
+
+            url = local || !isEnvVarsAvailable ? "$buildDir/repository" : "https://maven.bookmc.org/releases/"
+        }
+    }
+
+    publications {
+        //noinspection GroovyAssignabilityCheck
+        mavenJava(MavenPublication) {
+            from components.java
+            pom {
+                name = "book-loader"
+                url = "https://github.com/BookMC/loader"
+
+                developers {
+                    developer {
+                        name = "ChachyDev"
+                    }
+                }
+            }
+        }
+    }
 }

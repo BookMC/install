@@ -21,7 +21,7 @@ public class VersionJson {
         format.setTimeZone(TimeZone.getTimeZone("UTC"));
     }
 
-    public static String create(String mainClass, String[] minecraftArguments, String id, String version, Library[] libraries) {
+    public static String create(String mainClass, String[] minecraftArguments, String id, String name, String version, Library[] libraries) {
         JsonObject object = new JsonObject();
 
         JsonArray array = new JsonArray();
@@ -42,6 +42,7 @@ public class VersionJson {
         object.addProperty("minimumLauncherVersion", 14);
 
         object.addProperty("id", id);
+        object.addProperty("name", name);
 
         String timestamp = format.format(new Date());
 
@@ -55,7 +56,7 @@ public class VersionJson {
         return gson.toJson(object);
     }
 
-    public static byte[] createToBytes(String mainClass, String[] minecraftArguments, String id, String version, Library[] libraries) {
-        return create(mainClass, minecraftArguments, id, version, libraries).getBytes(StandardCharsets.UTF_8);
+    public static byte[] createToBytes(String mainClass, String[] minecraftArguments, String id, String name, String version, Library[] libraries) {
+        return create(mainClass, minecraftArguments, id, name, version, libraries).getBytes(StandardCharsets.UTF_8);
     }
 }

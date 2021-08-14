@@ -19,6 +19,7 @@ public class MojangInstallationPlatform implements InstallationPlatform {
     private final File directory;
 
     private final Gson gson = new Gson();
+    private JsonObject versionJson;
 
     public MojangInstallationPlatform(File directory) {
         this.directory = directory;
@@ -26,14 +27,7 @@ public class MojangInstallationPlatform implements InstallationPlatform {
 
     public MojangInstallationPlatform() {
         directory = MojangDirectoryUtils.providePlatformDirectory();
-        try {
-            FileUtils.deleteDirectory(new File(directory, "libraries/com/github/BookMC"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
-
-    private JsonObject versionJson;
 
     @Override
     public void init(byte[] versionJson) {
@@ -52,6 +46,12 @@ public class MojangInstallationPlatform implements InstallationPlatform {
     @Override
     public File createVersionFolder(String name) throws FileNotFoundException {
         File folder = new File(directory, "versions/" + name);
+        try {
+            FileUtils.deleteDirectory(folder);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         if (!folder.getParentFile().exists()) {
             throw new FileNotFoundException("Please install Minecraft to continue");
         }
