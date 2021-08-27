@@ -1,19 +1,20 @@
 package org.bookmc.versionjson.library;
 
-public class Library {
-    private final String name;
-    private final String url;
+import com.google.gson.JsonObject;
 
-    public Library(String name, String url) {
-        this.name = name;
-        this.url = url;
-    }
-
+public record Library(String name, String url) {
     public String getName() {
         return name;
     }
 
     public String getUrl() {
         return url;
+    }
+
+    public JsonObject toJsonObject() {
+        JsonObject object = new JsonObject();
+        object.addProperty("name", name);
+        object.addProperty("url", url);
+        return object;
     }
 }

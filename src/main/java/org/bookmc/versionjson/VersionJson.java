@@ -21,42 +21,37 @@ public class VersionJson {
         format.setTimeZone(TimeZone.getTimeZone("UTC"));
     }
 
-    public static String create(String mainClass, String[] minecraftArguments, String id, String name, String version, Library[] libraries) {
+    public static String create(String id, String inheritsFrom, String releaseType, String mainClass, Library[] libraries) {
         JsonObject object = new JsonObject();
 
-        JsonArray array = new JsonArray();
-
-        for (Library library : libraries) {
-            JsonObject libraryObject = new JsonObject();
-
-            libraryObject.addProperty("name", library.getName());
-            libraryObject.addProperty("url", library.getUrl());
-
-            array.add(libraryObject);
-        }
-
-        object.add("libraries", array);
-
-        object.addProperty("mainClass", mainClass);
-        object.addProperty("minecraftArguments", String.join(" ", minecraftArguments));
-        object.addProperty("minimumLauncherVersion", 14);
-
         object.addProperty("id", id);
-        object.addProperty("name", name);
+        object.addProperty("inheritsFrom", inheritsFrom);
 
         String timestamp = format.format(new Date());
 
         object.addProperty("releaseTime", timestamp);
         object.addProperty("time", timestamp);
 
-        object.addProperty("type", "release");
-        object.addProperty("inheritsFrom", version);
-        object.addProperty("jar", version);
+        object.addProperty("type", releaseType);
+
+        object.addProperty("mainClass", mainClass);
+
+        JsonObject argumentsObject = new JsonObject();
+        argumentsObject.add("game", new JsonArray());
+
+        object.add("arguments", argumentsObject);
+
+        JsonArray librariesArray = new JsonArray();
+        for (Library library : libraries) {
+            librariesArray.add(library.toJsonObject());
+        }
+
+        object.add("libraries", librariesArray);
 
         return gson.toJson(object);
     }
 
-    public static byte[] createToBytes(String mainClass, String[] minecraftArguments, String id, String name, String version, Library[] libraries) {
-        return create(mainClass, minecraftArguments, id, name, version, libraries).getBytes(StandardCharsets.UTF_8);
+    public static byte[] createToBytes(String id, String inheritsFrom, String releaseType, String mainClass, Library[] libraries) {
+        return create(id, inheritsFrom, releaseType, mainClass, libraries).getBytes(StandardCharsets.UTF_8);
     }
 }

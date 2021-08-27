@@ -46,12 +46,6 @@ public class MojangInstallationPlatform implements InstallationPlatform {
     @Override
     public File createVersionFolder(String name) throws FileNotFoundException {
         File folder = new File(directory, "versions/" + name);
-        try {
-            FileUtils.deleteDirectory(folder);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         if (!folder.getParentFile().exists()) {
             throw new FileNotFoundException("Please install Minecraft to continue");
         }

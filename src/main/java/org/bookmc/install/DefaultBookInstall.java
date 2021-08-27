@@ -33,17 +33,11 @@ public class DefaultBookInstall implements BookInstall {
                 throw new IllegalStateException("The local file for " + library.getName() + " could not be found!");
             }
 
-            String path = url.getPath().replace("/maven2", "");
+            String path = url.getPath();
             String name = path.substring(path.lastIndexOf('/') + 1).replace(".jar", "");
 
 
-            File file = library.isLocal() ? new File(librariesFolder, library.getPath()) : new File(librariesFolder, path.substring(0, path.lastIndexOf('/')));
-
-            try {
-                FileUtils.deleteDirectory(file.getParentFile());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            File file = new File(librariesFolder, library.getPath());
 
             if (library.isLocal()) {
                 logger.info("Attempting to copy " + url);
