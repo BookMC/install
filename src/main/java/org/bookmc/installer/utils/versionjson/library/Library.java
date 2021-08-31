@@ -1,4 +1,4 @@
-package org.bookmc.versionjson.library;
+package org.bookmc.installer.utils.versionjson.library;
 
 import com.google.gson.JsonObject;
 

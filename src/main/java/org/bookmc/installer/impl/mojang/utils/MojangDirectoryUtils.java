@@ -1,4 +1,4 @@
-package org.bookmc.mojang.utils;
+package org.bookmc.installer.impl.mojang.utils;
 
 import java.io.File;
 import java.util.Locale;

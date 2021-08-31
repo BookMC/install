@@ -1,7 +1,7 @@
 plugins {
     id "java"
     id "maven-publish"
-    id "org.bookmc.buildtools" version "0.3.3+build.15"
+    id "org.bookmc.buildtools" version "0.3.8+build.29"
 }
 
 ext {
@@ -30,14 +30,7 @@ dependencies {
     implementation group: "org.apache.logging.log4j", name: "log4j-api", version: "2.14.1"
     implementation group: "org.apache.logging.log4j", name: "log4j-core", version: "2.14.1"
 
-    testImplementation "org.junit.jupiter:junit-jupiter-api:5.7.0"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.7.0"
-
-    implementation group: "commons-io", name: "commons-io", version: "2.11.0"
-}
-
-test {
-    useJUnitPlatform()
+    implementation "commons-io:commons-io:2.11.0"
 }
 
 publishing {
@@ -63,12 +56,12 @@ publishing {
         mavenJava(MavenPublication) {
             from components.java
             pom {
-                name = "book-loader"
-                url = "https://github.com/BookMC/loader"
+                name = project.name
+                url = "https://github.com/BookMC/${project.name}"
 
                 developers {
                     developer {
-                        name = "ChachyDev"
+                        name = "BookMC"
                     }
                 }
             }

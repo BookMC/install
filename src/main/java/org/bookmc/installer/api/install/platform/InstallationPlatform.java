@@ -1,4 +1,4 @@
-package org.bookmc.api.install.platform;
+package org.bookmc.installer.api.install.platform;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,8 +16,6 @@ public interface InstallationPlatform {
     void appendLaunchProfile(String name, String lastVersionId, String type, String created, String lastUsed, String icon);
 
     File createVersionFolder(String name) throws FileNotFoundException;
-
-    Library[] getRequiredLibraries(byte[] versionJson) throws MalformedURLException;
 
     File getMinecraftDirectory();
 

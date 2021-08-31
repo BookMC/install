@@ -1,6 +1,6 @@
-package org.bookmc.api.install;
+package org.bookmc.installer.api.install;
 
-import org.bookmc.api.install.platform.InstallationPlatform;
+import org.bookmc.installer.api.install.platform.InstallationPlatform;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;

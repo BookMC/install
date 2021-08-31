@@ -1,9 +1,8 @@
-package org.bookmc.api.install.platform;
+package org.bookmc.installer.api.install.platform;
 
 import java.net.URL;
 
 public class Library {
-    private final boolean local;
     private final String path;
     private final String name;
     private final URL url;
@@ -12,7 +11,6 @@ public class Library {
         this.url = url;
         this.name = name;
         this.path = path;
-        this.local = local;
     }
 
     public String getName() {
@@ -25,9 +23,5 @@ public class Library {
 
     public String getPath() {
         return path;
-    }
-
-    public boolean isLocal() {
-        return local;
     }
 }

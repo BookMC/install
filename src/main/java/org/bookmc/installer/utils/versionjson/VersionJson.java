@@ -1,10 +1,10 @@
-package org.bookmc.versionjson;
+package org.bookmc.installer.utils.versionjson;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import org.bookmc.versionjson.library.Library;
+import org.bookmc.installer.utils.versionjson.library.Library;
 
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
@@ -42,6 +42,7 @@ public class VersionJson {
         object.add("arguments", argumentsObject);
 
         JsonArray librariesArray = new JsonArray();
+
         for (Library library : libraries) {
             librariesArray.add(library.toJsonObject());
         }

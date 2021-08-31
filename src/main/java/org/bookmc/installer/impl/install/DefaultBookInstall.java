@@ -1,12 +1,9 @@
-package org.bookmc.install;
+package org.bookmc.installer.impl.install;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.bookmc.api.install.BookInstall;
-import org.bookmc.api.install.platform.InstallationPlatform;
-import org.bookmc.api.install.platform.Library;
-import org.bookmc.api.install.utils.DownloadUtils;
+import org.bookmc.installer.api.install.BookInstall;
+import org.bookmc.installer.api.install.platform.InstallationPlatform;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,25 +23,6 @@ public class DefaultBookInstall implements BookInstall {
         File librariesFolder = platform.getLibrariesFolder();
         File versionFolder = platform.createVersionFolder(platform.getId());
 
-        for (Library library : platform.getRequiredLibraries(versionJson)) {
-            URL url = library.getUrl();
-
-            if (url == null) {
-                throw new IllegalStateException("The local file for " + library.getName() + " could not be found!");
-            }
-
-            String path = url.getPath();
-            String name = path.substring(path.lastIndexOf('/') + 1).replace(".jar", "");
-
-
-            File file = new File(librariesFolder, library.getPath());
-
-            if (library.isLocal()) {
-                logger.info("Attempting to copy " + url);
-                DownloadUtils.downloadJar(url, name, file);
-            }
-        }
-
         File versionJsonFile = new File(versionFolder, platform.getId() + ".json");
 
         try (FileOutputStream buffer = new FileOutputStream(versionJsonFile)) {
@@ -57,7 +35,6 @@ public class DefaultBookInstall implements BookInstall {
         // We've done our part! Let the platform do it's stuff
         Instant now = Instant.ofEpochMilli(System.currentTimeMillis());
         platform.appendLaunchProfile(platform.getId(), platform.getId(), "custom", now.toString(), now.toString(), icon);
-
         return true;
     }
 }

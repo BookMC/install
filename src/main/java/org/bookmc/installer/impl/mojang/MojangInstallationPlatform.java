@@ -1,13 +1,12 @@
-package org.bookmc.mojang;
+package org.bookmc.installer.impl.mojang;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import org.apache.commons.io.FileUtils;
-import org.bookmc.api.install.platform.InstallationPlatform;
-import org.bookmc.api.install.platform.Library;
-import org.bookmc.mojang.utils.MojangDirectoryUtils;
+import org.bookmc.installer.impl.mojang.utils.MojangDirectoryUtils;
+import org.bookmc.installer.api.install.platform.InstallationPlatform;
+import org.bookmc.installer.api.install.platform.Library;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -89,40 +88,6 @@ public class MojangInstallationPlatform implements InstallationPlatform {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public Library[] getRequiredLibraries(byte[] versionJson) throws MalformedURLException {
-        List<Library> libs = new ArrayList<>();
-
-        JsonObject obj = JsonParser.parseString(new String(versionJson)).getAsJsonObject();
-        JsonArray libraries = obj.get("libraries").getAsJsonArray();
-
-        for (int i = 0; i < libraries.size(); i++) {
-            JsonObject library = libraries.get(i).getAsJsonObject();
-            if (library.has("name") && library.has("url")) {
-                String libName = library.get("name").getAsString();
-                String[] split = libName.split(":");
-
-                String group = split[0].replace(".", "/");
-                String name = split[1];
-                String version = split[2];
-
-                String base = library.get("url").getAsString();
-
-                if (base.endsWith("/")) {
-                    base = base.substring(0, base.length() - 1);
-                }
-
-                String url = String.format("/%s/%s/%s/%s-%s.jar", group, name, version, name, version);
-
-                boolean local = version.equals("LOCAL");
-
-                libs.add(new Library(local ? this.getClass().getResource(url) : new URL(base + url), name, local, url));
-            }
-        }
-
-        return libs.toArray(new Library[0]);
     }
 
     @Override
