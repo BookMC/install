@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import org.bookmc.installer.api.install.java.JavaVersion;
 import org.bookmc.installer.utils.versionjson.library.Library;
 
 import java.nio.charset.StandardCharsets;
@@ -21,10 +22,11 @@ public class VersionJson {
         format.setTimeZone(TimeZone.getTimeZone("UTC"));
     }
 
-    public static String create(String id, String inheritsFrom, String releaseType, String mainClass, Library[] libraries) {
+    public static String create(String id, String inheritsFrom, String releaseType, String mainClass, JavaVersion javaVersion, Library[] libraries) {
         JsonObject object = new JsonObject();
 
         object.addProperty("id", id);
+        object.add("javaVersion", javaVersion.toJsonObject());
         object.addProperty("inheritsFrom", inheritsFrom);
 
         String timestamp = format.format(new Date());
@@ -35,6 +37,7 @@ public class VersionJson {
         object.addProperty("type", releaseType);
 
         object.addProperty("mainClass", mainClass);
+
 
         JsonObject argumentsObject = new JsonObject();
         argumentsObject.add("game", new JsonArray());
@@ -52,7 +55,7 @@ public class VersionJson {
         return gson.toJson(object);
     }
 
-    public static byte[] createToBytes(String id, String inheritsFrom, String releaseType, String mainClass, Library[] libraries) {
-        return create(id, inheritsFrom, releaseType, mainClass, libraries).getBytes(StandardCharsets.UTF_8);
+    public static byte[] createToBytes(String id, String inheritsFrom, String releaseType, String mainClass, JavaVersion version, Library[] libraries) {
+        return create(id, inheritsFrom, releaseType, mainClass, version, libraries).getBytes(StandardCharsets.UTF_8);
     }
 }

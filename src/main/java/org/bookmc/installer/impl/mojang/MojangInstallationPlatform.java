@@ -1,18 +1,12 @@
 package org.bookmc.installer.impl.mojang;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import org.bookmc.installer.impl.mojang.utils.MojangDirectoryUtils;
 import org.bookmc.installer.api.install.platform.InstallationPlatform;
-import org.bookmc.installer.api.install.platform.Library;
+import org.bookmc.installer.impl.mojang.utils.MojangDirectoryUtils;
 
 import java.io.*;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MojangInstallationPlatform implements InstallationPlatform {
     private final File directory;

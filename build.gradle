@@ -18,7 +18,7 @@ java {
 }
 
 group "org.bookmc"
-version "0.2.0${branch != "main" ? "-$branch" : ""}+${buildNumber ? "build.$buildNumber" : "local"}"
+version "0.3.0${branch != "main" ? "-$branch" : ""}+${buildNumber ? "build.$buildNumber" : "local"}"
 
 repositories {
     mavenCentral()
