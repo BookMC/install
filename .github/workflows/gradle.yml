@@ -1,6 +1,7 @@
 name: Build and test
 
 on:
+  workflow_dispatch:
   push:
 jobs:
   build_test_and_publish_jdk16:
