@@ -5,9 +5,6 @@ plugins {
 }
 
 ext {
-    def env = System.getenv()
-    buildNumber = env.BUILD_NUMBER
-    local = buildNumber == null
     branch = "git rev-parse --abbrev-ref HEAD".execute().text.trim()
 }
 
@@ -18,7 +15,7 @@ java {
 }
 
 group "org.bookmc"
-version "0.3.0${branch != "main" ? "-$branch" : ""}+${buildNumber ? "build.$buildNumber" : "local"}"
+version "0.3.1${branch != "main" && !branch.isEmpty() ? "-$branch" : ""}"
 
 repositories {
     mavenCentral()
@@ -27,8 +24,8 @@ repositories {
 dependencies {
     implementation "com.google.code.gson:gson:2.8.7"
 
-    implementation group: "org.apache.logging.log4j", name: "log4j-api", version: "2.14.1"
-    implementation group: "org.apache.logging.log4j", name: "log4j-core", version: "2.14.1"
+    implementation "org.apache.logging.log4j:log4j-api:2.14.1"
+    implementation "org.apache.logging.log4j:log4j-core:2.14.1"
 
     implementation "commons-io:commons-io:2.11.0"
 }
@@ -38,16 +35,16 @@ publishing {
         maven {
             def env = System.getenv()
 
-            boolean isEnvVarsAvailable = env.containsKey("MAVEN_USER") && env.containsKey("MAVEN_PASSWORD")
+            boolean login = env.containsKey("MAVEN_USER") && env.containsKey("MAVEN_PASSWORD")
 
-            if (isEnvVarsAvailable) {
+            if (login) {
                 credentials {
                     username env.get("MAVEN_USER")
                     password env.get("MAVEN_PASSWORD")
                 }
             }
 
-            url = local || !isEnvVarsAvailable ? "$buildDir/repository" : "https://maven.bookmc.org/releases/"
+            url = !login ? "$buildDir/repository" : "https://maven.bookmc.org/releases/"
         }
     }
 

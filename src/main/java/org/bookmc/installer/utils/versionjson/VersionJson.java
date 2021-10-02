@@ -22,25 +22,35 @@ public class VersionJson {
         format.setTimeZone(TimeZone.getTimeZone("UTC"));
     }
 
-    public static String create(String id, String inheritsFrom, String releaseType, String mainClass, JavaVersion javaVersion, Library[] libraries) {
+    public static String create(String id, String inheritsFrom, String releaseType, String mainClass, JavaVersion javaVersion, String[] gameArgs, String[] jvmArgs, Library[] libraries) {
         JsonObject object = new JsonObject();
 
         object.addProperty("id", id);
-        object.add("javaVersion", javaVersion.toJsonObject());
         object.addProperty("inheritsFrom", inheritsFrom);
 
         String timestamp = format.format(new Date());
-
         object.addProperty("releaseTime", timestamp);
         object.addProperty("time", timestamp);
 
+        object.add("javaVersion", javaVersion.toJsonObject());
         object.addProperty("type", releaseType);
-
         object.addProperty("mainClass", mainClass);
 
 
         JsonObject argumentsObject = new JsonObject();
-        argumentsObject.add("game", new JsonArray());
+
+        JsonArray gameArgsArray = new JsonArray();
+        for (String gameArg : gameArgs) {
+            gameArgsArray.add(gameArg);
+        }
+
+        JsonArray jvmArgsArray = new JsonArray();
+        for (String jvmArg : jvmArgs) {
+            jvmArgsArray.add(jvmArg);
+        }
+
+        argumentsObject.add("game", gameArgsArray);
+        argumentsObject.add("jvm", jvmArgsArray);
 
         object.add("arguments", argumentsObject);
 
@@ -55,7 +65,7 @@ public class VersionJson {
         return gson.toJson(object);
     }
 
-    public static byte[] createToBytes(String id, String inheritsFrom, String releaseType, String mainClass, JavaVersion version, Library[] libraries) {
-        return create(id, inheritsFrom, releaseType, mainClass, version, libraries).getBytes(StandardCharsets.UTF_8);
+    public static byte[] createToBytes(String id, String inheritsFrom, String releaseType, String mainClass, JavaVersion version, String[] gameArgs, String[] jvmArgs, Library[] libraries) {
+        return create(id, inheritsFrom, releaseType, mainClass, version, gameArgs, jvmArgs, libraries).getBytes(StandardCharsets.UTF_8);
     }
 }

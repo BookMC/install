@@ -17,10 +17,9 @@ public class DefaultBookInstall implements BookInstall {
     private final Logger logger = LogManager.getLogger(this);
 
     @Override
-    public boolean install(InstallationPlatform platform, byte[] versionJson, String icon) throws FileNotFoundException, MalformedURLException {
+    public boolean install(InstallationPlatform platform, byte[] versionJson, String icon) throws FileNotFoundException {
         platform.init(versionJson);
         // Create our new folder
-        File librariesFolder = platform.getLibrariesFolder();
         File versionFolder = platform.createVersionFolder(platform.getId());
 
         File versionJsonFile = new File(versionFolder, platform.getId() + ".json");
